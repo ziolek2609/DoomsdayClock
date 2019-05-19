@@ -1,0 +1,24 @@
+<html>
+  <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <title>DoomsdayClock</title>
+  </head>
+  <body>
+    <h1>DoomsdayClock</h1>
+    <h2>Dzięki aplikacji DoomsdayClock dowiesz się ile czasu zostało ludziom na tym marnym łez padole:) Jedyne co musisz uczynić to wpisać datę końca świata!</h2>
+    <h3>P S Możesz liczyć na fajne gify i filmiki przy poszczególnych czasach do apokalipsy!!!</h3>
+    <p>
+      <form method="POST" action=/zegar>
+        <div class="form-group">
+          Wpisz datę końca świata:
+          <input type="date" name="edate" min="now">
+          Wpisz godzinę końca świata:
+          <input type="time" name="etime" step="1">
+        </div>
+        <input class="btn bt-primary" type="submit" value="Odliczaj!"
+    </p>
+
+  </body>
+</html>
