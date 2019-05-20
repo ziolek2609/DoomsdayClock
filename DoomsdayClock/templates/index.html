@@ -1,25 +1,34 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-      <title>DoomsdayClock</title>
-  </head>
-  <body>
-    <h1>DoomsdayClock</h1>
-    <h2>Dzięki aplikacji DoomsdayClock dowiesz się ile czasu zostało ludziom na tym marnym łez padole:) Jedyne co musisz uczynić to wpisać datę końca świata!</h2>
-    <h3>P S Możesz liczyć na fajne gify i filmiki przy poszczególnych czasach do apokalipsy!!!</h3>
-    <p>
-      <form method="POST" action=/zegar>
-        <div class="form-group">
-          Wpisz datę końca świata:
-          <input type="date" name="edate">
-          Wpisz godzinę końca świata:
-          <input type="time" name="etime" step="1">
-        </div>
-        <input class="btn bt-primary" type="submit" value="Odliczaj!"
-    </p>
-
-  </body>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <title>DoomsdayClock</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    </head>
+    <body style="background-color:#cccccc;">
+        <h1 style="font-size:100px;color:#cc0000;font-family:Bookman;text-align:center;">DoomsdayClock</h1>
+        <hr>
+        <h2 style="text-align:center;"><i><q>We all have two lifes. The second one starts when you realize, that you only have one.</q></i></h2>
+        <p style="text-align:center;font-size:25px;">Since you've realized it, end your first life. <abbr title="The end of the f***ing world">TEOTFW</abbr>!!!</p>
+        <br>
+        <pre style="text-align:center;">Thanks to our great DoomsdayClock you'll be able to know how much time we have on this world.
+The most incredible thing is that <strong>it's you who choose THE HOUR.</strong>
+Choose wisely.</pre>
+        <p style="text-align:center;background-color:rgba(255, 99, 71, 0.6);">Our <ins>best</ins> specialists took care your sense of humor is fine while waiting for THE END OF THE F***ING WORLD.</p>
+        <br>
+        <p>
+            <form method="POST" action=/zegar>
+                <div style="border:2px solid rgba(255, 99, 71, 0.6);text-align:center" class="form-group">
+                    Type the date of the end of the world:
+                    <input type="date" name="edate">
+                    Type the hour of the end of the world:
+                    <input type="time" name="etime" step="1">
+                </div>
+            <input style="text-align:center" class="btn bt-primary" type="submit" value="COUNT DOWN!!!"
+        </p>
+    </body>
 </html>
