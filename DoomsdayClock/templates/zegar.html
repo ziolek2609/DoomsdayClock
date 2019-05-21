@@ -9,22 +9,56 @@
   <body>
     <h1> Koniec świata nastąpi: {{ edate }} o godzine {{ etime }}</h1>
     <div id="zegar"></div> <!---tu jest odlicznik czasu, który jest wstawiany z timer.html i aktualizowany przez js poniżej--->
+    <div id="gif"></div>
+    <!--skrypt js korzystający z ajax, dzięki czemu możemy przeładować daną część strony bez potrzeby przeładowywania całej, dzięki czemu nasz odlicznik aktualizuje się co sekundę, bez potrzeby przeładowania całej strony-->
+    <script>
+            var isGifLessThanHourDisplayed = false;
+            var isGifLessThanDayDisplayed = false
 
-  <!--skrypt js korzystający z ajax, dzięki czemu możemy przeładować daną część strony bez potrzeby przeładowywania całej, dzięki czemu nasz odlicznik aktualizuje się co sekundę, bez potrzeby przeładowania całej strony-->
-  <script>
           window.setInterval(() => {
-            $.ajax({
-                url:'/timer',
-                data: {
-                    edate: '{{edate}}',
-                    etime: '{{etime}}'
-                },
-                type: 'POST',
-                success: function(response){
-                    document.getElementById("zegar").innerHTML = response
-                }
-            });
-            }, 1000);
-      </script>
+              $.ajax({
+                  url:'/timer',
+                  data: {
+                      edate: '{{edate}}',
+                      etime: '{{etime}}'
+                  },
+                  type: 'POST',
+                  success: function(response){
+                      document.getElementById("zegar").innerHTML = response
+                  }
+              });
+
+              if (3600*24 >= {{ sec }} > 0 && !isGifLessThanDayDisplayed) {
+                  isGifLessThanDayDisplayed = true;
+                  $.ajax({
+                      url: '/gif',
+                      data: {
+                          gif: "gif2.html"
+                      },
+                      type: 'POST',
+                      success: function (response) {
+                          document.getElementById("gif").innerHTML = response
+                      }
+                  })
+              }
+
+              if (3600 >= {{ sec }} > 0 && !isGifLessThanHourDisplayed) {
+                  isGifLessThanHourDisplayed = true;
+                  $.ajax({
+                      url: '/gif',
+                      data: {
+                          gif: "gif1.html"
+                      },
+                      type: 'POST',
+                      success: function (response) {
+                          document.getElementById("gif").innerHTML = response
+                      }
+                  })
+              }
+        }, 1000);
+        setTimeout(function(){
+   document.getElementById('gif').style.display = 'none';
+}, 20000);
+    </script>
   </body>
 </html>
