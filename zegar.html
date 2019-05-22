@@ -1,41 +1,66 @@
-﻿<html>
+<html>
   <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<title>DoomsdayClock</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+      <title>DoomsdayClock</title>
   </head>
   <body>
-    <h1> Koniec świata nastąpi: {{ edate }} o godzine {{ etime }}</h1><p id="demo"></p>
+    <p style="text-align:center;font-size:25px;font-family:Verdana;color:#ffffff;background-color:#a6a6a6;">- - - - - DOOMSDAY WILL COME: {{ edate }} AT {{ etime }}- - - - -</p>
+    <hr>
+    <div id="zegar"></div> <!---tu jest odlicznik czasu, który jest wstawiany z timer.html i aktualizowany przez js poniżej--->
+    <div id="gif", style ="text-align:center"></div>
+    <!--skrypt js korzystający z ajax, dzięki czemu możemy przeładować daną część strony bez potrzeby przeładowywania całej, dzięki czemu nasz odlicznik aktualizuje się co sekundę, bez potrzeby przeładowania całej strony-->
+    <script>
+            var isGifLessThanHourDisplayed = false;
+            var isGifLessThanDayDisplayed = false
 
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("Jan 05,2020 15:16:24").getTime();
+          window.setInterval(() => {
+              $.ajax({
+                  url:'/timer',
+                  data: {
+                      edate: '{{edate}}',
+                      etime: '{{etime}}'
+                  },
+                  type: 'POST',
+                  success: function(response){
+                      document.getElementById("zegar").innerHTML = response
+                  }
+              });
 
-// Update the count down every 1 second
-var x = setInterval(function() {
+              if (3600*24 >= {{ sec }} > 0 && !isGifLessThanDayDisplayed) {
+                  isGifLessThanDayDisplayed = true;
+                  $.ajax({
+                      url: '/gif',
+                      data: {
+                          gif: "gif2.html"
+                      },
+                      type: 'POST',
+                      success: function (response) {
+                          document.getElementById("gif").innerHTML = response
+                      }
+                  })
+              }
 
-  // Get today's date and time
-  var now = new Date().getTime();
+              if (3600 >= {{ sec }} > 0 && !isGifLessThanHourDisplayed) {
+                  isGifLessThanHourDisplayed = true;
+                  $.ajax({
+                      url: '/gif',
+                      data: {
+                          gif: "gif1.html"
+                      },
+                      type: 'POST',
+                      success: function (response) {
+                          document.getElementById("gif").innerHTML = response
+                      }
+                  })
+              }
+        }, 1000);
+        setTimeout(function(){
+   document.getElementById('gif').style.display = 'none';
+}, 20000);
 
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-
-  // If the count down is finished, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "Koniec świata już się rozpoczął! ";
-  }
-}, 1000);
-</script>
+    </script>
   </body>
 </html>
