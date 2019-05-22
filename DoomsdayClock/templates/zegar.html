@@ -1,4 +1,4 @@
-<html>
+﻿<html>
   <head>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -7,7 +7,8 @@
       <title>DoomsdayClock</title>
   </head>
   <body>
-    <h1> Koniec świata nastąpi: {{ edate }} o godzine {{ etime }}</h1>
+    <p style="text-align:center;font-size:25px;font-family:Verdana;color:#ffffff;background-color:#a6a6a6;">- - - - - DOOMSDAY WILL COME: {{ edate }} AT {{ etime }}- - - - -</p>
+    <hr>
     <div id="zegar"></div> <!---tu jest odlicznik czasu, który jest wstawiany z timer.html i aktualizowany przez js poniżej--->
     <div id="gif"></div>
     <!--skrypt js korzystający z ajax, dzięki czemu możemy przeładować daną część strony bez potrzeby przeładowywania całej, dzięki czemu nasz odlicznik aktualizuje się co sekundę, bez potrzeby przeładowania całej strony-->
