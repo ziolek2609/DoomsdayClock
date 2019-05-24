@@ -9,10 +9,19 @@
   <body>
     <p style="text-align:center;font-size:25px;font-family:Verdana;color:#ffffff;background-color:#a6a6a6;">- - - - - DOOMSDAY WILL COME: {{ edate }} AT {{ etime }}- - - - -</p>
     <hr>
-    <div id="zegar"></div> <!---tu jest odlicznik czasu, który jest wstawiany z timer.html i aktualizowany przez js poniżej--->
-    <!--skrypt js korzystający z ajax, dzięki czemu możemy przeładować daną część strony bez potrzeby przeładowywania całej, dzięki czemu nasz odlicznik aktualizuje się co sekundę, bez potrzeby przeładowania całej strony-->
+    <div id="zegar"></div> <!--tu wstawia się odlicznik oraz ewentualne gify/filmiki z timer.html, dzieki poniższemu JS-->
+    <div id="gif"><div>
+    <!--JavaScript pozwalający odświeżać część strony, bez odświeżania całej-->
     <script>
-          window.setInterval(() => {
+
+        var lessthanhour = false;
+        var lessthanday = false;
+        var lessthanyear = false;
+        var stop = false;
+
+          //  Funkcja odświeżająca co sekundę timer i wstawiająca zawartość timer.html, gdzie znajduje się odlicznik i ewentualne gify lub filmiki
+        function licznik_czasu(){
+          var licznik = window.setInterval(() => {
               $.ajax({
                   url:'/timer',
                   data: {
@@ -21,13 +30,26 @@
                   },
                   type: 'POST',
                   success: function(response){
-                      document.getElementById("zegar").innerHTML = response
+                      document.getElementById("zegar").innerHTML = response;
+
+                      // Wywołuje to skrypt zawarty w timer.html, który został dynamicznie dołączony do struktury strony
+                      eval(document.getElementById("zegar").getElementsByTagName("script")[0].innerHTML)
+                  },
+                  // Wyświetla stosowną informacje, gdy pojawia się błąd wywołany przez 'if sec<=0'(doomsdayclock.py)
+                  error: function () {
+                      stop = true;
+                      document.getElementById("zegar").innerHTML = "DOOMSDAY HAS COME"
                   }
               });
-        }, 1000);
-        setTimeout(function(){
-   document.getElementById('gif').style.display = 'none';
-}, 20000);
+              // Zatrzymuje odświeżanie co sekundę po osiągnięciu czasu końca światta
+              if (stop){
+                clearInterval(licznik);
+              }
+          }, 1000);
+        }
+      licznik_czasu()
+
     </script>
   </body>
 </html>
+
