@@ -28,30 +28,30 @@ def timer():
     secs = (sec % 60)
     # różnica daty wpisanej i obecnej to pozostały czas do końca świata
     # obliczenia w celu uzyskania wartości poszczególnych jednostek czasowych:
-    if delta.total_seconds()<0:
+    if delta.total_seconds()<0: #jeżeli minie wyznaczony czas, to spełnia się określone warunki i zegar oraz data znikają
         return jsonify(
-        timer=render_template('timer.html', years=years, days=days, hours=hours, mins=mins, secs=secs),
+        timer=render_template('timer.html', years=years, days=days, hours=hours, mins=mins, secs=secs), #renderuje plik z zegarem
         zegar = True,
         the_end = True,
         doomsday = True
         )
-    elif (3600-20)<delta.total_seconds() <= 3600:
+    elif (3600-20)<delta.total_seconds() <= 3600: # jeżeli zostanie poniżej godziny to na 20 sekund wyświetli się gif
         return jsonify(
             timer=render_template('timer.html', years=years, days=days, hours=hours, mins=mins, secs=secs),
             less_than_hour=True
             )
 
-    elif (60*60*24-20)<delta.total_seconds() <= (60*60*24):
+    elif (60*60*24-20)<delta.total_seconds() <= (60*60*24): # jeżeli zostanie poniżej dnia to na 20 sekund pojawi się gif
         return jsonify(
             timer=render_template('timer.html', years=years, days=days, hours=hours, mins=mins, secs=secs),
             less_than_day=True
         )
-    elif (60*60*24*365-20)<delta.total_seconds()<=(60*60*365*24):
+    elif (60*60*24*365-20)<delta.total_seconds()<=(60*60*365*24): # jeżeli zostało poniżej roku to na 20 sekund pojawi sie gif
         return jsonify(
             timer=render_template('timer.html', years=years, days=days, hours=hours, mins=mins, secs=secs),
             less_than_year=True
             )
-    else:
+    else: # jeżeli nie zostanie spełniony żaden z powyższych warunków, to renderuje się zwykły zegar odliczający czcas do końca
         return jsonify(
         timer=render_template('timer.html', years=years, days=days, hours=hours, mins=mins, secs=secs)
     )
@@ -61,8 +61,8 @@ def timer():
 def czas():
     edate = request.form['edate']
     etime = request.form['etime']
-    return render_template('zegar.html', edate=edate, etime=etime)
+    return render_template('zegar.html', edate=edate, etime=etime) # renderuje zegar z wykorzystaniem czasu i daty podanej w index.html
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': #uruchamia serwer
     app.run(debug=True)
