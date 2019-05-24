@@ -7,18 +7,18 @@
       <title>DoomsdayClock</title>
   </head>
   <body>
-    <p style="text-align:center;font-size:25px;font-family:Verdana;color:#ffffff;background-color:#a6a6a6;">- - - - - DOOMSDAY WILL COME: {{ edate }} AT {{ etime }}- - - - -</p>
-    <div id="zegar" style="visibility:unset"></div>
-    <div style="visibility: hidden" align=center id="less_than_year">
-        <iframe src="https://giphy.com/embed/3orif3VHjBeYBDTGlG" width="280" height="162" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/season-16-the-simpsons-16x19-3orif3VHjBeYBDTGlG">via GIPHY</a></p>
+    <p id="doomsday" style="text-align:center;font-size:25px;font-family:Verdana;color:#ffffff;background-color:#a6a6a6;">- - - - - DOOMSDAY WILL COME: {{ edate }} AT {{ etime }}- - - - -</p>
+    <div id="zegar" style="visibility:hidden"></div>
+    <div style="visibility:hidden;text-align:center;font-size:80px;font-family:Verdana;color:#FF0000;background-color:#000000;"id="the_end">- - - - -THIS IS THE END- - - - -</div>
+    <div style="visibility: hidden" margin=0 align= center  id="less_than_year">
+        <iframe src="https://giphy.com/embed/3orif3VHjBeYBDTGlG" width="300" height="300" frameBorder="0" class="giphy-embed"allowFullScreen></iframe><p><a href="https://giphy.com/gifs/season-16-the-simpsons-16x19-3orif3VHjBeYBDTGlG">via GIPHY</a></p>
     </div>
-    <div style="visibility: hidden" align=center id="less_than_day">
-        <iframe src="https://giphy.com/embed/3orif3VHjBeYBDTGlG" width="280" height="162" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/season-16-the-simpsons-16x19-3orif3VHjBeYBDTGlG">via GIPHY</a></p>
+    <div style="visibility: hidden"margin = 0 align = center id="less_than_day">
+        <iframe src="https://giphy.com/embed/2wUzjQMSsQKZzLdWj4" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/2wUzjQMSsQKZzLdWj4">via GIPHY</a></p>
     </div>
-    <div style="visibility: hidden" align=center id="less_than_hour">
-        <iframe src="https://giphy.com/embed/KJ1f5iTl4Oo7u" width="380" height="170" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/just-thanks-KJ1f5iTl4Oo7u">via GIPHY</a></p>
+    <div style="visibility:hidden"margin=0 align = center  id="less_than_hour">
+        <iframe src="https://giphy.com/embed/BpXmTsM9q9thS" width="480" height="275" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/terminator-genisys-doomsday-BpXmTsM9q9thS">via GIPHY</a></p>
     </div>
-    <div style="visibility:hidden;text-align:center;font-size:25px;font-family:Verdana;color:#ffffff;background-color:#a6a6a6;"  id="the_end"></div>
   <script>
           window.setInterval(() => {
             $.ajax({
@@ -37,7 +37,14 @@
 
                     else
                       document.getElementById("zegar").style.visibility = "unset"
-                    
+                    if (response.the_end)
+                        document.getElementById('the_end').style.visibility ="unset"
+                    else
+                        document.getElementById('the_end').style.visibility = "hidden"
+                    if(response.doomsday)
+                      document.getElementById('doomsday').style.visibility = "hidden"
+                    else
+                      document.getElementById('doomsday').style.visibility = "unset"
                     if (response.less_than_hour)
                         document.getElementById("less_than_hour").style.visibility = "unset"
                     else
