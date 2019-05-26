@@ -10,25 +10,24 @@ R e m a i n e d:</p>
 </p>
 
   <script>
-
   // JS wstawia gify z poszczególnych html'i, gdy osiągany jest zadany czas
-    if (60 >= {{ sec }} && {{ sec }} >= 60-15 && !lessthanhour) {
-        lessthanhour = true;
-          $.ajax({
-              url: '/gif',
-              data: {
-                  gif: "lessthanhour.html"
-              },
-              type: 'POST',
-              success: function (response) {
-                    document.getElementById("gif").innerHTML = response
-                    setTimeout(function(){
-                    document.getElementById('gif').style.display = 'none';
-              }, 20000);
-              }
-          })
-    }
-    
+      if (60 >= {{ sec }} && {{ sec }} >= 60-15 && !lessthanminute) {
+          lessthanminute = true;
+            $.ajax({
+                url: '/gif',
+                data: {
+                    gif: "lessthanminute.html"
+                },
+                type: 'POST',
+                success: function (response) {
+                      document.getElementById("gif").innerHTML = response
+                      setTimeout(function(){
+                      document.getElementById('gif').style.display = 'none';
+                }, 20000);
+                }
+            })
+      }
+
       if (60*60 >= {{ sec }} && {{ sec }} >= 60*60-15 && !lessthanhour) {
         lessthanhour = true;
           $.ajax({
@@ -45,7 +44,6 @@ R e m a i n e d:</p>
               }
           })
     }
-
     if (60*60*24 >= {{ sec }}& {{sec}}>=60*60*24-15 && !lessthanday) {
       lessthanday = true;
         $.ajax({
@@ -58,11 +56,10 @@ R e m a i n e d:</p>
                   document.getElementById("gif").innerHTML = response
                   setTimeout(function(){
                   document.getElementById('gif').style.display = 'none';
-            }, 180000);
+            }, 200000);
             }
         })
   }
-
     if (60*60*24*365 >= {{ sec }} && {{ sec }} >= 60*60*24*365-15 && !lessthanyear) {
       lessthanyear = true;
         $.ajax({
@@ -75,7 +72,7 @@ R e m a i n e d:</p>
                   document.getElementById("gif").innerHTML = response
                   setTimeout(function(){
                   document.getElementById('gif').style.display = 'none';
-            }, 20000);
+            }, 260000);
             }
         })
   }
@@ -91,7 +88,7 @@ R e m a i n e d:</p>
                 document.getElementById("gif").innerHTML = response
                 setTimeout(function(){
                 document.getElementById('gif').style.display = 'none';
-          }, 234000);
+          }, 250000);
           }
       })
 }
@@ -99,5 +96,3 @@ R e m a i n e d:</p>
 </body>
 
 </html>
-
-
