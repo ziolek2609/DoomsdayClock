@@ -28,15 +28,25 @@ def timer():
     hours = (sec % (24 * 60 * 60)) // (60 * 60)
     mins = (sec % (60 * 60)) // 60
     secs = (sec % 60)
+    # wywołuje błąd, odlicznik dojdzie do zera
+    if sec <= 0:
+        abort(404)
     # renderuje jednostki czasowe do timer.html w celu wyświetlenia odlicznika czasu
-    return render_template('timer.html', years=years, days=days, hours=hours, mins=mins, secs=secs)
+    return render_template('timer.html', sec=sec, years=years, days=days, hours=hours, mins=mins, secs=secs)
 
 @app.route('/zegar', methods=['POST'])
 def czas():
     edate = request.form['edate'] # pobieram wczytaną przez użytkownika datę
     etime = request.form['etime'] # pobieram wczytaną przez użytkowanika godzinę
-    # renderuje do zegar.html date i godzine pobraną od użytkownika, aby wyświtlić kiedy będzie koniec świata
+    # renderuje datę i czas końca świata do zegar.html, aby wyświetlić infomracje o końcu
     return render_template('zegar.html', edate=edate, etime=etime)
+
+@app.route('/gif', methods=['POST'])
+def gif():
+    gif = request.form['gif']
+    print(gif)
+    # pozawala na wyświetlanie gifów
+    return render_template(gif)
 
 
 if __name__ == '__main__':

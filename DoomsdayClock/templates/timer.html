@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <body>
@@ -8,16 +8,80 @@ R e m a i n e d:</p>
 <p style="text-align:center;font-size:25px;color:#cc0000;font-family:Verdana;;background-color:#e6e6e6;border:2px solid rgba(255, 99, 71, 0.6)">
 <b>{{ years }}</b> years <b>{{ days }}</b> days <b>{{ hours }}</b> hours <b>{{ mins }}</b> minutes <b>{{ secs }}</b> seconds
 </p>
-<br>
-<br>
-<p style="text-align:center;">
-m i e j s c e
-<br>
-<br>
-n a
-<br>
-<br> 
-g i f a
+
+  <script>
+
+  // JS wstawia gify z poszczególnych html'i, gdy osiągany jest zadany czas
+    
+      if (60*60 >= {{ sec }} && {{ sec }} >= 60*60-15 && !lessthanhour) {
+        lessthanhour = true;
+          $.ajax({
+              url: '/gif',
+              data: {
+                  gif: "lessthanhour.html"
+              },
+              type: 'POST',
+              success: function (response) {
+                    document.getElementById("gif").innerHTML = response
+                    setTimeout(function(){
+                    document.getElementById('gif').style.display = 'none';
+              }, 20000);
+              }
+          })
+    }
+
+    if (60*60*24 >= {{ sec }}& {{sec}}>=60*60*24-15 && !lessthanday) {
+      lessthanday = true;
+        $.ajax({
+            url: '/gif',
+            data: {
+                gif: "lessthanday.html"
+            },
+            type: 'POST',
+            success: function (response) {
+                  document.getElementById("gif").innerHTML = response
+                  setTimeout(function(){
+                  document.getElementById('gif').style.display = 'none';
+            }, 18000);
+            }
+        })
+  }
+
+    if (60*60*24*365 >= {{ sec }} && {{ sec }} >= 60*60*24*365-15 && !lessthanyear) {
+      lessthanyear = true;
+        $.ajax({
+            url: '/gif',
+            data: {
+                gif: "lessthanyear.html"
+            },
+            type: 'POST',
+            success: function (response) {
+                  document.getElementById("gif").innerHTML = response
+                  setTimeout(function(){
+                  document.getElementById('gif').style.display = 'none';
+            }, 20000);
+            }
+        })
+  }
+        if (60*60*24*365*7 >= {{ sec }} && {{ sec }}>= 60*60*24*365*7-234 && !lessthan7years) {
+    lessthan7years = true;
+      $.ajax({
+          url: '/gif',
+          data: {
+              gif: "lessthan7years.html"
+          },
+          type: 'POST',
+          success: function (response) {
+                document.getElementById("gif").innerHTML = response
+                setTimeout(function(){
+                document.getElementById('gif').style.display = 'none';
+          }, 234000);
+          }
+      })
+}
+  </script>
 </body>
 
 </html>
+
+
