@@ -12,6 +12,7 @@ R e m a i n e d:</p>
   <script>
 
   // JS wstawia gify z poszczególnych html'i, gdy osiągany jest zadany czas
+    
       if (60*60 >= {{ sec }} && {{ sec }} >= 60*60-15 && !lessthanhour) {
         lessthanhour = true;
           $.ajax({
@@ -62,6 +63,22 @@ R e m a i n e d:</p>
             }
         })
   }
+        if (60*60*24*365*7 >= {{ sec }} && {{ sec }}>= 60*60*24*365*7-234 && !lessthan7years) {
+    lessthan7years = true;
+      $.ajax({
+          url: '/gif',
+          data: {
+              gif: "lessthan7years.html"
+          },
+          type: 'POST',
+          success: function (response) {
+                document.getElementById("gif").innerHTML = response
+                setTimeout(function(){
+                document.getElementById('gif').style.display = 'none';
+          }, 234000);
+          }
+      })
+}
   </script>
 </body>
 
