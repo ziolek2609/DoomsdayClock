@@ -12,6 +12,22 @@ R e m a i n e d:</p>
   <script>
 
   // JS wstawia gify z poszczególnych html'i, gdy osiągany jest zadany czas
+    if (60 >= {{ sec }} && {{ sec }} >= 60-15 && !lessthanhour) {
+        lessthanhour = true;
+          $.ajax({
+              url: '/gif',
+              data: {
+                  gif: "lessthanhour.html"
+              },
+              type: 'POST',
+              success: function (response) {
+                    document.getElementById("gif").innerHTML = response
+                    setTimeout(function(){
+                    document.getElementById('gif').style.display = 'none';
+              }, 20000);
+              }
+          })
+    }
     
       if (60*60 >= {{ sec }} && {{ sec }} >= 60*60-15 && !lessthanhour) {
         lessthanhour = true;
@@ -42,7 +58,7 @@ R e m a i n e d:</p>
                   document.getElementById("gif").innerHTML = response
                   setTimeout(function(){
                   document.getElementById('gif').style.display = 'none';
-            }, 18000);
+            }, 180000);
             }
         })
   }
